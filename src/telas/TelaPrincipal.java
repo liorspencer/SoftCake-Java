@@ -23,12 +23,13 @@ public class TelaPrincipal extends JFrame{
     private List<Produto> produtosCarregados,produtos = new ArrayList<>();
     private List<Pedido> pedidosCarregados,pedidos = new ArrayList<>();
     private EscreverLerArquivos arquivos = new EscreverLerArquivos();
+    private ImageIcon icone;
     private Sobre sobre = new Sobre();
 
     public TelaPrincipal(String title) throws HeadlessException {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500,400);
+        setSize(500,500);
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);//centraliza a tela
         iniciarComponentes();
@@ -66,7 +67,8 @@ public class TelaPrincipal extends JFrame{
         jmbBarra = new JMenuBar();
         setJMenuBar(jmbBarra);//adicionei a barra da tela
         jmbBarra.setVisible(false);
-
+        icone =  new ImageIcon(getClass().getResource("/imagem/icon.png"));
+        setIconImage(icone.getImage());
         //objetos da barra de menu
         jmArquivo = new JMenu("Arquivo");
         jmCadastro = new JMenu("Cadastro");
@@ -93,7 +95,6 @@ public class TelaPrincipal extends JFrame{
         jmiAutores = new JMenuItem("Autores");
 
         //adicionando componentes
-
         //adicionando opções de menu na barra
         jmbBarra.add(jmArquivo);
         jmbBarra.add(jmCadastro);

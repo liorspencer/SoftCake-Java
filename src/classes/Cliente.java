@@ -3,22 +3,30 @@ package classes;
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
-    private String nome,email,endereco,cidade,senha,telefone,cpf;
-    private int cep,numeroEndereco,id;
+    private String nome;
+    private String email;
+    private String endereco;
+    private String cidade;
+    private String estado;
+    private String senha;
+    private String telefone;
+    private String cpf;
+    private String cep;
+    private int id;
     private boolean genero;
 
-        public Cliente(int id, String nome,boolean genero, String email, String endereco, String cidade, String senha, String telefone, String cpf, int cep, int numeroEndereco) {
+        public Cliente(int id, String nome,boolean genero, String email, String endereco, String cidade, String estado, String senha, String telefone, String cpf, String cep) {
         this.id = id;
         this.nome = nome;
         this.genero = genero;
         this.email = email;
         this.endereco = endereco;
         this.cidade = cidade;
+        this.estado = estado;
         this.senha = senha;
         this.telefone = telefone;
         this.cpf = cpf;
         this.cep = cep;
-        this.numeroEndereco = numeroEndereco;
     }
 
     public int getId() {
@@ -61,13 +69,6 @@ public class Cliente implements Serializable {
         return cpf;
     }
 
-    public int getCep() {
-        return cep;
-    }
-
-    public int getNumeroEndereco() {
-        return numeroEndereco;
-    }
     public String mostrarCadastro(){
         if (this.genero) {
             return "\n\nID: " + this.id+
@@ -75,22 +76,22 @@ public class Cliente implements Serializable {
                     "\nGênero: Feminino" +
                     "\nE-mail: " + this.email +
                     "\nEndereço: " + this.endereco +
+                    "\nEstado: " + this.estado +
                     "\nCidade: " + this.cidade +
                     "\nTelefone: " + this.telefone +
                     "\nCPF: " + this.cpf +
-                    "\nCEP: " + this.cep +
-                    "\nNúmero de endereço: " + this.numeroEndereco;
+                    "\nCEP: " + this.cep;
         }else{
             return "\n\nID: " + this.id+
                     "\nNome: " + this.nome +
                     "\nGênero: Masculino" +
                     "\nE-mail: " + this.email +
                     "\nEndereço: " + this.endereco +
+                    "\nEstado: " + this.estado +
                     "\nCidade: " + this.cidade +
                     "\nTelefone: " + this.telefone +
                     "\nCPF: " + this.cpf +
-                    "\nCEP: " + this.cep +
-                    "\nNúmero de endereço: " + this.numeroEndereco;
+                    "\nCEP: " + this.cep;
         }
     }
 }

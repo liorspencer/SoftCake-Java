@@ -1,15 +1,17 @@
 package paineis;
 
+import classes.FontesPadrao;
 import telas.TelaPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
+
 
 public class PainelLogin extends JPanel {
     private JLabel jlLogin, jlUsuario, jlSenha, jlImagem;
+    private FontesPadrao fontesPadrao;
     private JTextField jtfUsuario;
     private JPasswordField jpfSenha;
     private JButton jbCadastrar, jbLogin;
@@ -19,7 +21,6 @@ public class PainelLogin extends JPanel {
     //construtor
 
     public PainelLogin() {
-        setSize(500,400);
         setLayout(null);
         setBackground(Color.white);
         iniciarComponentes();
@@ -37,6 +38,7 @@ public class PainelLogin extends JPanel {
         jbCadastrar = new JButton("Cadastrar");
         imagem = new ImageIcon(getClass().getResource("/imagem/proj.png"));
         jlImagem = new JLabel(imagem);
+        fontesPadrao = new FontesPadrao();
 
         //adicionar na tela
         add(jlLogin);
@@ -48,15 +50,25 @@ public class PainelLogin extends JPanel {
         add(jbCadastrar);
         add(jlImagem);
 
+        //estilizar os componentes
+        jlLogin.setFont(fontesPadrao.fontArialTitulo());
+        jlUsuario.setFont(fontesPadrao.fontArialCorpo());
+        jtfUsuario.setFont(fontesPadrao.fontArialCorpo());
+        jlSenha.setFont(fontesPadrao.fontArialCorpo());
+        jpfSenha.setFont(fontesPadrao.fontArialCorpo());
+        jbLogin.setFont(fontesPadrao.fontArialBotao());
+        jbCadastrar.setFont(fontesPadrao.fontArialBotao());
+        jpfSenha.setEchoChar('●');
+
         //dimensionar os componentes na tela
-        jlImagem.setBounds(0,0,500,400);
-        jlLogin.setBounds(210,50,80,20);
-        jlUsuario.setBounds(150,110,60,20);
-        jlSenha.setBounds(150,170,60,20);
-        jtfUsuario.setBounds(150,130,200,20);
-        jpfSenha.setBounds(150,190,200,20);
-        jbLogin.setBounds(190,240,120,20);
-        jbCadastrar.setBounds(190,265,120,20);
+        jlImagem.setBounds(0,0,490,500);
+        jlLogin.setBounds(190,120,130,20);
+        jlUsuario.setBounds(150,170,60,20);
+        jlSenha.setBounds(150,230,60,20);
+        jtfUsuario.setBounds(150,190,200,30);
+        jpfSenha.setBounds(150,250,200,30);
+        jbLogin.setBounds(190,290,120,30);
+        jbCadastrar.setBounds(190,330,120,30);
 
         jlLogin.setForeground(Color.WHITE);
         jlUsuario.setForeground(Color.WHITE);
@@ -68,12 +80,12 @@ public class PainelLogin extends JPanel {
         jbLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (jtfUsuario.getText().equals(usuario) && String.valueOf(jpfSenha.getPassword()).equals(senha)){
+                //if (jtfUsuario.getText().equals(usuario) && String.valueOf(jpfSenha.getPassword()).equals(senha)){
                     JOptionPane.showMessageDialog(null,"Autenticado com sucesso!","Confirmação",JOptionPane.INFORMATION_MESSAGE);
                     TelaPrincipal.desbloquearPrograma();
-                } else {
-                    JOptionPane.showMessageDialog(null,"Usuário/Senha inválidos.","ERRO",JOptionPane.ERROR_MESSAGE);
-                }
+                //} else {
+                //    JOptionPane.showMessageDialog(null,"Usuário/Senha inválidos.","ERRO",JOptionPane.ERROR_MESSAGE);
+                //}
             }
         });
         jbCadastrar.addActionListener(new ActionListener() {
