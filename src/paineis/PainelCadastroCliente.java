@@ -199,7 +199,7 @@ public class PainelCadastroCliente extends JPanel {
                 int id;
                 boolean achou = false,genero = true;
                 String erro = "Erro: Preencha os seguintes campos corretamente:\n";
-                if (!jtfNome.getText().isEmpty() && !jtfEmail.getText().isEmpty() && !jtfEndereco.getText().isEmpty() && !jtfCidade.getText().isEmpty() && !Arrays.toString(jpfSenha.getPassword()).isEmpty() && !jtfTelefone.getText().isEmpty() && !jtfCpf.getText().isEmpty() && !jtfCep.getText().isEmpty() && !jtfNumeroEndereco.getText().isEmpty()){
+                if (!jtfNome.getText().isEmpty() && !jtfEmail.getText().isEmpty() && !jtfEndereco.getText().isEmpty() && !jtfCidade.getText().isEmpty() && !jtfBairro.getText().isEmpty() && !jcbEstado.getSelectedItem().toString().equals("--")  && !Arrays.toString(jpfSenha.getPassword()).isEmpty() && !jtfTelefone.getText().contains("_") && !jtfCpf.getText().contains("_") && !jtfCep.getText().contains("_") && !jtfNumeroEndereco.getText().isEmpty()){
                     try {
                         nome = jtfNome.getText();
                         if (jrbFeminino.isSelected()) {
@@ -255,16 +255,19 @@ public class PainelCadastroCliente extends JPanel {
                     if (jtfCidade.getText().isEmpty()){
                         erro+="\nCidade";
                     }
+                    if (jcbEstado.getSelectedItem().toString().equals("--")){
+                        erro+="\nEstado";
+                    }
                     if (Arrays.toString(jpfSenha.getPassword()).isEmpty()){
                         erro+="\nSenha";
                     }
-                    if (jtfTelefone.getText().isEmpty()){
+                    if (jtfTelefone.getText().contains("_")){
                         erro+="\nNome";
                     }
-                    if (jtfCpf.getText().isEmpty()){
+                    if (jtfCpf.getText().contains("_")){
                         erro+="\nCPF";
                     }
-                    if (jtfCep.getText().isEmpty()){
+                    if (jtfCep.getText().contains("_")){
                         erro+="\nCEP";
                     }
                     if (jtfNumeroEndereco.getText().isEmpty()){

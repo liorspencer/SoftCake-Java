@@ -1,6 +1,7 @@
 package paineis;
 
 import classes.Cliente;
+import classes.FontesPadrao;
 import classes.LimitarCaracteres;
 import classes.Produto;
 
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PainelCadastroProduto extends JPanel {
+    private FontesPadrao fontes;
     private JLabel jlProduto, jlNome, jlDescricao, jlPreco, jlPeso, jlDisponibilidade;
     private JScrollPane jspDescricao;
     private JTextField jtfNome,jtfPreco, jtfPeso;
@@ -36,6 +38,7 @@ public class PainelCadastroProduto extends JPanel {
 
     private void iniciarComponentes() {
         //objetos
+        fontes = new FontesPadrao();
         jlProduto = new JLabel("Cadastrar Produto");
         jlNome = new JLabel("Nome:");
         jlDescricao = new JLabel("Descrição:");
@@ -74,21 +77,37 @@ public class PainelCadastroProduto extends JPanel {
         bgDisponibilidade.add(jrbSim);
         bgDisponibilidade.add(jrbNao);
 
+        //estiizar componentes
+        jlProduto.setHorizontalAlignment(SwingConstants.CENTER);
+        jlProduto.setFont(fontes.fontArialTitulo());
+        jlNome.setFont(fontes.fontArialCorpo());
+        jtfNome.setFont(fontes.fontArialCorpo());
+        jlPreco.setFont(fontes.fontArialCorpo());
+        jtfPreco.setFont(fontes.fontArialCorpo());
+        jlDescricao.setFont(fontes.fontArialCorpo());
+        jspDescricao.setFont(fontes.fontArialCorpo());
+        jtaDescricao.setFont(fontes.fontArialCorpo());
+        jtfPeso.setFont(fontes.fontArialCorpo());
+        jlPeso.setFont(fontes.fontArialCorpo());
+        jlDisponibilidade.setFont(fontes.fontArialCorpo());
+        jrbSim.setFont(fontes.fontArialCorpo());
+        jrbNao.setFont(fontes.fontArialCorpo());
+        jbCadastrar.setFont(fontes.fontArialBotao());
         //dimensionar componentes
-        jlProduto.setBounds(190, 10, 120, 20);
+        jlProduto.setBounds(0, 10, 485, 20);
         jlNome.setBounds(20, 40, 50, 20);
-        jtfNome.setBounds(100, 40, 360, 20);
+        jtfNome.setBounds(100, 35, 360, 30);
         jlPreco.setBounds(20, 80, 50, 20);
-        jtfPreco.setBounds(100, 80, 360, 20);
+        jtfPreco.setBounds(100, 75, 360, 30);
         jlDescricao.setBounds(20, 120, 80, 20);
-        jspDescricao.setBounds(100,120,360,80);
-        jtaDescricao.setBounds(20,140,360,80);
-        jtfPeso.setBounds(100, 220, 360, 20);
-        jlPeso.setBounds(20, 220, 70, 20);
-        jlDisponibilidade.setBounds(20, 260, 70, 20);
-        jrbSim.setBounds(100, 260, 100, 20);
-        jrbNao.setBounds(200, 260, 100, 20);
-        jbCadastrar.setBounds(195, 300, 100, 20);
+        jspDescricao.setBounds(100,120,360,160);
+        jtaDescricao.setBounds(20,120,360,160);
+        jtfPeso.setBounds(100, 300, 360, 30);
+        jlPeso.setBounds(20, 300, 70, 20);
+        jlDisponibilidade.setBounds(20, 340, 70, 20);
+        jrbSim.setBounds(100, 340, 100, 20);
+        jrbNao.setBounds(200, 340, 100, 20);
+        jbCadastrar.setBounds(195, 380, 100, 30);
     }
 
     private void criarEventos() {
