@@ -1,6 +1,7 @@
 package arquivos;
 
 import classes.Cliente;
+import classes.Login;
 import classes.Pedido;
 import classes.Produto;
 
@@ -9,6 +10,37 @@ import java.io.*;
 import java.util.List;
 
 public class EscreverLerArquivos {
+    public void escreverArquivoLogin(Login login){
+        try {
+            FileOutputStream fluxo = new FileOutputStream("Login.bin");// cria um arquivo chamado Login
+            ObjectOutputStream objeto = new ObjectOutputStream(fluxo);
+            objeto.writeObject(login);
+            objeto.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Login lerObjetoLogin(){
+        //Declaração da variável para receber o objeto gravado
+        Login login;// variavel para receber o objeto
+        try {
+            FileInputStream fluxo = new FileInputStream("Login.bin"); //ler arquivo
+            ObjectInputStream objeto = new ObjectInputStream(fluxo);
+            login = (Login) objeto.readObject();
+            objeto.close();
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Arquivo de credencial não encontrado.");
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return login;
+    }
     public void escreverArquivoCliente(List<Cliente> lista){
         try {
             FileOutputStream fluxo = new FileOutputStream("Cliente.bin");// cria um arquivo chamado Cliente

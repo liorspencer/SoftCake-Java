@@ -1,6 +1,8 @@
 package paineis;
 
+import arquivos.EscreverLerArquivos;
 import classes.FontesPadrao;
+import classes.Login;
 import telas.TelaPrincipal;
 
 import javax.swing.*;
@@ -17,6 +19,7 @@ public class PainelLogin extends JPanel {
     private JButton jbCadastrar, jbLogin;
     private String usuario,senha;
     private ImageIcon imagem;
+    private EscreverLerArquivos arquivos = new EscreverLerArquivos();
 
     //construtor
 
@@ -80,20 +83,19 @@ public class PainelLogin extends JPanel {
         jbLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //if (jtfUsuario.getText().equals(usuario) && String.valueOf(jpfSenha.getPassword()).equals(senha)){
+                if (jtfUsuario.getText().equals(arquivos.lerObjetoLogin().getUsuario()) && String.valueOf(jpfSenha.getPassword()).equals(arquivos.lerObjetoLogin().getSenha())){
                     JOptionPane.showMessageDialog(null,"Autenticado com sucesso!","Confirmação",JOptionPane.INFORMATION_MESSAGE);
                     TelaPrincipal.desbloquearPrograma();
-                //} else {
-                //    JOptionPane.showMessageDialog(null,"Usuário/Senha inválidos.","ERRO",JOptionPane.ERROR_MESSAGE);
-                //}
+                } else {
+                    JOptionPane.showMessageDialog(null,"Usuário/Senha inválidos.","ERRO",JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         jbCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!jtfUsuario.getText().isEmpty() && !String.valueOf(jpfSenha.getPassword()).isEmpty()){
-                    usuario = jtfUsuario.getText();
-                    senha = String.valueOf(jpfSenha.getPassword());
+                    arquivos.escreverArquivoLogin(new Login(jtfUsuario.getText(),String.valueOf(jpfSenha.getPassword())));
                     jtfUsuario.setText("");
                     jpfSenha.setText("");
                     JOptionPane.showMessageDialog(null,"Usuário Cadastrado!","Confirmação",JOptionPane.INFORMATION_MESSAGE);

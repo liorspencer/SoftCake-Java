@@ -1,10 +1,7 @@
 package telas;
 
 import arquivos.EscreverLerArquivos;
-import classes.Cliente;
-import classes.Pedido;
-import classes.Produto;
-import classes.Sobre;
+import classes.*;
 import paineis.*;
 
 import javax.swing.*;
