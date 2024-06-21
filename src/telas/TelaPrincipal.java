@@ -16,7 +16,8 @@ public class TelaPrincipal extends JFrame{
     private JMenu jmArquivo,jmCadastro,jmVenda,jmGerenciar,jmVisualizar,jmSobre;//usado para criar uma opção no menu
     private JMenuItem jmiSalvar,jmiCarregar,jmiSair,jmiCadastroCliente,jmiCadastroProduto,jmiCadastroPedidos,jmiGerenciarPedidos,jmiGerenciarProdutos,jmiDados,jmiPesquisa,jmiAplicativo,jmiAutores;
     private List<Cliente> clientesCarregados,clientes = new ArrayList<>();
-    private List<Produto> produtosCarregados,produtos = new ArrayList<>();
+    private List<Produto> produtosCarregados;
+    private static List<Produto> produtos = new ArrayList<>();
     private List<Pedido> pedidosCarregados;
     private static List<Pedido> pedidos = new ArrayList<>();
     private EscreverLerArquivos arquivos = new EscreverLerArquivos();
@@ -83,6 +84,12 @@ public class TelaPrincipal extends JFrame{
         PainelGerenciarPedidos gerenciarPedidos = new PainelGerenciarPedidos(pedidos);
         contentPane.removeAll();//remove todos os componentes da tela
         contentPane.add(gerenciarPedidos);//adicionar o painel
+        contentPane.validate();//validar os componentes
+    }
+    public static void reiniciarPainelGerenciarProdutos(){
+        PainelGerenciarProdutos gerenciarProdutos = new PainelGerenciarProdutos(produtos);
+        contentPane.removeAll();//remove todos os componentes da tela
+        contentPane.add(gerenciarProdutos);//adicionar o painel
         contentPane.validate();//validar os componentes
     }
     private void iniciarComponentes() {
