@@ -13,11 +13,12 @@ import java.util.List;
 public class TelaPrincipal extends JFrame{
     private static Container contentPane;//usado para manipular uma tela
     private static JMenuBar jmbBarra;//usado para criar uma barra de menu
-    private JMenu jmArquivo,jmCadastro,jmVenda,jmVisualizar,jmSobre;//usado para criar uma opção no menu
-    private JMenuItem jmiSalvar,jmiCarregar,jmiSair,jmiCadastroCliente,jmiCadastroProduto,jmiCadastroPedidos,jmiDados,jmiPesquisa,jmiAplicativo,jmiAutores;
+    private JMenu jmArquivo,jmCadastro,jmVenda,jmGerenciar,jmVisualizar,jmSobre;//usado para criar uma opção no menu
+    private JMenuItem jmiSalvar,jmiCarregar,jmiSair,jmiCadastroCliente,jmiCadastroProduto,jmiCadastroPedidos,jmiGerenciarPedidos,jmiGerenciarProdutos,jmiDados,jmiPesquisa,jmiAplicativo,jmiAutores;
     private List<Cliente> clientesCarregados,clientes = new ArrayList<>();
     private List<Produto> produtosCarregados,produtos = new ArrayList<>();
-    private List<Pedido> pedidosCarregados,pedidos = new ArrayList<>();
+    private List<Pedido> pedidosCarregados;
+    private static List<Pedido> pedidos = new ArrayList<>();
     private EscreverLerArquivos arquivos = new EscreverLerArquivos();
     private ImageIcon icone;
     private Sobre sobre = new Sobre();
@@ -78,6 +79,12 @@ public class TelaPrincipal extends JFrame{
         contentPane.removeAll();
         jmbBarra.setVisible(true);
     }
+    public static void reiniciarPainelGerenciarPedidos(){
+        PainelGerenciarPedidos gerenciarPedidos = new PainelGerenciarPedidos(pedidos);
+        contentPane.removeAll();//remove todos os componentes da tela
+        contentPane.add(gerenciarPedidos);//adicionar o painel
+        contentPane.validate();//validar os componentes
+    }
     private void iniciarComponentes() {
         //criar objetos
         contentPane = getContentPane();//devolve um objeto do tipo Container(tela)
@@ -90,6 +97,7 @@ public class TelaPrincipal extends JFrame{
         jmArquivo = new JMenu("Arquivo");
         jmCadastro = new JMenu("Cadastro");
         jmVenda = new JMenu("Venda");
+        jmGerenciar = new JMenu("Gerenciar");
         jmVisualizar = new JMenu("Visualizar");
         jmSobre = new JMenu("Sobre");
 
@@ -106,6 +114,10 @@ public class TelaPrincipal extends JFrame{
         //menu Venda
         jmiCadastroPedidos = new JMenuItem("Cadastrar pedido");
 
+        //menu Gerenciar
+        jmiGerenciarPedidos = new JMenuItem("Pedidos");
+        jmiGerenciarProdutos = new JMenuItem("Produtos");
+
         //menu Visualizar
         jmiDados = new JMenuItem("Dados completos");
         jmiPesquisa = new JMenuItem("Pesquisar");
@@ -119,12 +131,12 @@ public class TelaPrincipal extends JFrame{
         jmbBarra.add(jmArquivo);
         jmbBarra.add(jmCadastro);
         jmbBarra.add(jmVenda);
+        jmbBarra.add(jmGerenciar);
         jmbBarra.add(jmVisualizar);
         jmbBarra.add(jmSobre);
 
         //adicionando itens nas opções de menu
         //opção Arquivo
-
         jmArquivo.add(jmiSalvar);
         jmArquivo.add(jmiCarregar);
         jmArquivo.addSeparator();
@@ -136,6 +148,10 @@ public class TelaPrincipal extends JFrame{
 
         //opção Venda
         jmVenda.add(jmiCadastroPedidos);
+
+        //opção Gerenciar
+        jmGerenciar.add(jmiGerenciarPedidos);
+        jmGerenciar.add(jmiGerenciarProdutos);
 
         //opção Visualizar
         jmVisualizar.add(jmiDados);
@@ -220,6 +236,26 @@ public class TelaPrincipal extends JFrame{
                 PainelCadastroPedido pedido = new PainelCadastroPedido(pedidos,clientes,produtos);
                 contentPane.removeAll();//remove todos os componentes da tela
                 contentPane.add(pedido);//adicionar o painel
+                contentPane.validate();//validar os componentes
+            }
+        });
+        jmiGerenciarPedidos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
+                PainelGerenciarPedidos gerenciarPedidos = new PainelGerenciarPedidos(pedidos);
+                contentPane.removeAll();//remove todos os componentes da tela
+                contentPane.add(gerenciarPedidos);//adicionar o painel
+                contentPane.validate();//validar os componentes
+            }
+        });
+        jmiGerenciarProdutos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
+                PainelGerenciarProdutos gerenciarProdutos = new PainelGerenciarProdutos(produtos);
+                contentPane.removeAll();//remove todos os componentes da tela
+                contentPane.add(gerenciarProdutos);//adicionar o painel
                 contentPane.validate();//validar os componentes
             }
         });

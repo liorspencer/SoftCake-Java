@@ -1,2 +1,2 @@
 # SoftCake-Java
-gerenciador de produtos e vendas da loja softcake (trabalho do SENAI)
+Gerenciador de Clientes, Produtos e Vendas da loja SoftCake (Sprint SENAI)

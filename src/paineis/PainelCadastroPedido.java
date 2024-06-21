@@ -4,21 +4,26 @@ import classes.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PainelCadastroPedido extends JPanel {
     private FontesPadrao fontes;
+    private MaskFormatter mfCpf;
     private JLabel jlPedido, jlNome, jlQuantidade, jlDescricao, jlCpf, jlPreco, jlNomeProdutoSelecao, jlNomeProdutoSelecaoResultado, jlDescricaoSelecao, jlDescricaoSelecaoResultado, jlPesoSelecao, jlPesoSelecaoResultado, jlPrecoSelecao, jlPrecoSelecaoResultado;
     private JScrollPane jspDescricao, jspPainelSelecaoProduto;
     private int itens = 1;
     private boolean mostrandoProdutos = false;
     private JPanel jpEscolhaProduto, jpContainerInterno;
-    private JTextField jtfNome, jtfCpf, jtfQuantidade, jtfPreco;
+    private JTextField jtfNome, jtfQuantidade, jtfPreco;
+    private JFormattedTextField jtfCpf;
     private JTextArea jtaDescricao;
+    private String  formDescricao;
     private JSeparator jsSelecao;
     private ArrayList<IdBotao> jbAdicionar = new ArrayList<>();
     private JButton jbAdicionarProdutos, jbCadastrar;
@@ -44,6 +49,12 @@ public class PainelCadastroPedido extends JPanel {
 
     private void iniciarComponentes() {
         //objetos
+        try {
+            mfCpf = new MaskFormatter("###.###.###-##");
+            mfCpf.setPlaceholderCharacter('_');
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         fontes = new FontesPadrao();
         jlPedido = new JLabel("Cadastrar Pedido");
         jlNome = new JLabel("Nome:");
@@ -53,7 +64,7 @@ public class PainelCadastroPedido extends JPanel {
         jlPreco = new JLabel("Preço:");
         jtfNome = new JTextField();
         jtfNome.setDocument(new LimitarCaracteres(50,LimitarCaracteres.TipoDadoEntrada.LETRAS));
-        jtfCpf = new JTextField();
+        jtfCpf = new JFormattedTextField(mfCpf);
         jtfCpf.setDocument(new LimitarCaracteres(11,LimitarCaracteres.TipoDadoEntrada.NUMERO_INTEIRO));
         jtfPreco = new JTextField();
         jtfPreco.setDocument(new LimitarCaracteres(13,LimitarCaracteres.TipoDadoEntrada.DECIMAL));
@@ -155,6 +166,7 @@ public class PainelCadastroPedido extends JPanel {
                                 precoAtual += (produtos.get((idBotao.getId()-1)).getPreco()*Integer.parseInt(jtfQuantidade.getText()));
                                 jtfPreco.setText(String.valueOf(precoAtual));
                                 jtaDescricao.append(itens+". "+jtfQuantidade.getText()+"x "+produtos.get((idBotao.getId()-1)).getNome()+"\nValor Unitário: "+produtos.get((idBotao.getId()-1)).getPreco()+"\n\n");
+                                formDescricao += itens+". "+jtfQuantidade.getText()+"x "+produtos.get((idBotao.getId()-1)).getNome()+"\nValor Unitário: "+produtos.get((idBotao.getId()-1)).getPreco()+"\n\n";
                                 itens++;
                             }
                         });
@@ -212,7 +224,7 @@ public class PainelCadastroPedido extends JPanel {
                                 }
                             }
                         }
-                        descricao = jtaDescricao.getText();
+                        descricao = formDescricao;
                         if (idCliente==0){
                             descricao+="\n\nCLIENTE NÃO CADASTRADO!";
                         }
