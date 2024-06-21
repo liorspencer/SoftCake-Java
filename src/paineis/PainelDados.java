@@ -96,9 +96,11 @@ public class PainelDados extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 jtaMostrar.setText("Produtos Cadastrados");
                 for (Produto produto: produtos){
-                    if (jckDisponivel.isSelected() && produto.isDisponibilidade()) {
+                    if ((jckDisponivel.isSelected() && jckIndisponivel.isSelected())||(!jckDisponivel.isSelected() && !jckIndisponivel.isSelected())) {
                         jtaMostrar.append(produto.mostrarCadastro());
                     } else if (jckIndisponivel.isSelected() && !produto.isDisponibilidade()) {
+                        jtaMostrar.append(produto.mostrarCadastro());
+                    } else if (jckDisponivel.isSelected() && produto.isDisponibilidade()){
                         jtaMostrar.append(produto.mostrarCadastro());
                     }
                 }
@@ -110,9 +112,11 @@ public class PainelDados extends JPanel {
 
                 jtaMostrar.setText("Pedidos Cadastrados");
                 for (Pedido pedido: pedidos) {
-                        if (jckInativo.isSelected() && !pedido.isAtivo()) {
+                        if ((jckInativo.isSelected() && jckInativo.isSelected()) || (jckInativo.isSelected() && jckInativo.isSelected())) {
                             jtaMostrar.append(pedido.mostrarCadastro());
                         } else if (jckAtivo.isSelected() && pedido.isAtivo()) {
+                            jtaMostrar.append(pedido.mostrarCadastro());
+                        } else if (jckInativo.isSelected() && !pedido.isAtivo()) {
                             jtaMostrar.append(pedido.mostrarCadastro());
                         }
                 }

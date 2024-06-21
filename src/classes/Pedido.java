@@ -58,14 +58,14 @@ public class Pedido implements Serializable {
             return "\n\nNome do Cliente: " + this.nomeCliente +
                     "\nID do Pedido: " + this.idPedido +
                     "\nID do Cliente: " + this.idCliente +
-                    "\nDescrição do pedido: " + this.descricao +
+                    "\nDescrição do pedido:\n " + this.descricao +
                     "\nPreço Total: " + precoTotal +
                     "\nEstado do pedido: Ativo";
         }else {
             return "\n\nNome do Cliente: " + this.nomeCliente +
                     "\nID do Pedido: " + this.idPedido +
                     "\nID do Cliente: " + this.idCliente +
-                    "\nDescrição do pedido: " + this.descricao +
+                    "\nDescrição do pedido:\n " + this.descricao +
                     "\nPreço Total: " + this.precoTotal +
                     "\nEstado do pedido: Finalizado";
         }

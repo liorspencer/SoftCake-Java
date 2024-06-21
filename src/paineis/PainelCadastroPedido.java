@@ -71,7 +71,7 @@ public class PainelCadastroPedido extends JPanel {
         jbAdicionarProdutos = new JButton("Adicionar Produtos");
         jtfQuantidade = new JTextField();
         jtfQuantidade.setDocument(new LimitarCaracteres(2,LimitarCaracteres.TipoDadoEntrada.NUMERO_INTEIRO));
-        jbCadastrar = new JButton("Cadastrar preço");
+        jbCadastrar = new JButton("Cadastrar pedido");
         jsSelecao = new JSeparator(SwingConstants.VERTICAL);
         jsSelecao.setVisible(false);
 

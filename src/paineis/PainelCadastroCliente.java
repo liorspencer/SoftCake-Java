@@ -181,7 +181,7 @@ public class PainelCadastroCliente extends JPanel {
         jlCidade.setBounds(92,220,374,20);
         jtfCidade.setBounds(92,240,374,30);
         jlEstado.setBounds(20,220,52,20);
-        jcbEstado.setBounds(20,240,52,30);
+        jcbEstado.setBounds(20,240,54,30);
         jlEndereco.setBounds(20,280,370,20);
         jtfEndereco.setBounds(20,300,370,30);
         jlNumeroEndereco.setBounds(400,280,60,20);
