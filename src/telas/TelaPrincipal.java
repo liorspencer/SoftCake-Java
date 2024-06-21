@@ -31,6 +31,7 @@ public class TelaPrincipal extends JFrame{
         setSize(500,500);
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);//centraliza a tela
+        setResizable(false);
         WindowListener checagemJanela = new WindowAdapter() {//AÇÃO ANTES DE FECHAR
             @Override
             public void windowClosing(WindowEvent e) {

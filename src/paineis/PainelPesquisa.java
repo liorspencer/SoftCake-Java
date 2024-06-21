@@ -1,6 +1,7 @@
 package paineis;
 
 import classes.Cliente;
+import classes.FontesPadrao;
 import classes.Pedido;
 import classes.Produto;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class PainelPesquisa extends JPanel {
     private JLabel jlPesquisa;
     private JButton jbClientes, jbProdutos, jbPedidos;
+    private FontesPadrao fontes;
     private JComboBox jcbClientes, jcbProdutos, jcbPedidos;
     private JTextField jtfPesquisa;
     private String[] jcbClientesItens = {"ID","E-mail","Telefone","CPF"},jcbProdutosItens = {"ID","Nome","Preço","Peso"},jcbPedidosItens = {"ID do Pedido","ID do Cliente"};
@@ -36,6 +38,7 @@ public class PainelPesquisa extends JPanel {
 
     private void iniciarComponentes() {
         // Objetos
+        fontes = new FontesPadrao();
         jlPesquisa = new JLabel("Pesquisa");
         jbClientes = new JButton("Clientes");
         jbProdutos = new JButton("Produtos");
@@ -58,16 +61,27 @@ public class PainelPesquisa extends JPanel {
         add(jtfPesquisa);
         add(jsMostrar);
 
+        //estilizar
+        jlPesquisa.setFont(fontes.fontArialCorpo());
+        jtfPesquisa.setFont(fontes.fontArialCorpo());
+        jbClientes.setFont(fontes.fontArialBotao());
+        jbProdutos.setFont(fontes.fontArialBotao());
+        jbPedidos.setFont(fontes.fontArialBotao());
+        jcbClientes.setFont(fontes.fontArialCorpo());
+        jcbProdutos.setFont(fontes.fontArialCorpo());
+        jcbPedidos.setFont(fontes.fontArialCorpo());
+        jsMostrar.setFont(fontes.fontArialCorpo());
+
         //dimensionar
-        jlPesquisa.setBounds(215,10,95,20);
-        jtfPesquisa.setBounds(165,30,155,20);
-        jbClientes.setBounds(20, 80, 95, 20);
-        jbProdutos.setBounds(195, 80, 95, 20);
-        jbPedidos.setBounds(370, 80, 95, 20);
-        jcbClientes.setBounds(20,60,95,20);
-        jcbProdutos.setBounds(195,60,95,20);
-        jcbPedidos.setBounds(370,60,95,20);
-        jsMostrar.setBounds(20, 120, 440, 200);
+        jlPesquisa.setBounds(215,5,95,20);
+        jtfPesquisa.setBounds(165,25,155,30);
+        jbClientes.setBounds(20, 85, 95, 30);
+        jbProdutos.setBounds(195, 85, 95, 30);
+        jbPedidos.setBounds(370, 85, 95, 30);
+        jcbClientes.setBounds(20,55,95,30);
+        jcbProdutos.setBounds(195,55,95,30);
+        jcbPedidos.setBounds(370,55,95,30);
+        jsMostrar.setBounds(20, 120, 440, 300);
 
     }
     private void criarEventos() {
