@@ -9,15 +9,14 @@ import paineis.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TelaPrincipal extends JFrame{
     private static Container contentPane;//usado para manipular uma tela
     private static JMenuBar jmbBarra;//usado para criar uma barra de menu
-    private JMenu jmArquivo,jmCadastro,jmVisualizar,jmSobre;//usado para criar uma opção no menu
+    private JMenu jmArquivo,jmCadastro,jmVenda,jmVisualizar,jmSobre;//usado para criar uma opção no menu
     private JMenuItem jmiSalvar,jmiCarregar,jmiSair,jmiCadastroCliente,jmiCadastroProduto,jmiCadastroPedidos,jmiDados,jmiPesquisa,jmiAplicativo,jmiAutores;
     private List<Cliente> clientesCarregados,clientes = new ArrayList<>();
     private List<Produto> produtosCarregados,produtos = new ArrayList<>();
@@ -28,10 +27,31 @@ public class TelaPrincipal extends JFrame{
 
     public TelaPrincipal(String title) throws HeadlessException {
         super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setSize(500,500);
         getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);//centraliza a tela
+        WindowListener checagemJanela = new WindowAdapter() {//AÇÃO ANTES DE FECHAR
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Object[] opcoes = {"Sim", "Não", "Cancelar"};
+                int opcao = JOptionPane.showOptionDialog(null, "Deseja salvar antes de sair?", "Sair", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opcoes, opcoes[0]);
+                switch (opcao) {
+                    case 0:
+                        arquivos.escreverArquivoCliente(clientes);
+                        arquivos.escreverArquivoProduto(produtos);
+                        arquivos.escreverArquivoPedido(pedidos);
+                        System.exit(0);
+                        break;
+                    case 1:
+                        System.exit(0);
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        };
+        addWindowListener(checagemJanela);
         iniciarComponentes();
         criarEventos();
         clientesCarregados=arquivos.lerObjetoCliente();
@@ -61,7 +81,6 @@ public class TelaPrincipal extends JFrame{
         jmbBarra.setVisible(true);
     }
     private void iniciarComponentes() {
-
         //criar objetos
         contentPane = getContentPane();//devolve um objeto do tipo Container(tela)
         jmbBarra = new JMenuBar();
@@ -72,6 +91,7 @@ public class TelaPrincipal extends JFrame{
         //objetos da barra de menu
         jmArquivo = new JMenu("Arquivo");
         jmCadastro = new JMenu("Cadastro");
+        jmVenda = new JMenu("Venda");
         jmVisualizar = new JMenu("Visualizar");
         jmSobre = new JMenu("Sobre");
 
@@ -84,7 +104,9 @@ public class TelaPrincipal extends JFrame{
         //menu Cadastro
         jmiCadastroCliente = new JMenuItem("Cadastro de Clientes");
         jmiCadastroProduto = new JMenuItem("Cadastro de Produtos");
-        jmiCadastroPedidos = new JMenuItem("Cadastro de Pedidos");
+
+        //menu Venda
+        jmiCadastroPedidos = new JMenuItem("Cadastrar pedido");
 
         //menu Visualizar
         jmiDados = new JMenuItem("Dados completos");
@@ -98,19 +120,24 @@ public class TelaPrincipal extends JFrame{
         //adicionando opções de menu na barra
         jmbBarra.add(jmArquivo);
         jmbBarra.add(jmCadastro);
+        jmbBarra.add(jmVenda);
         jmbBarra.add(jmVisualizar);
         jmbBarra.add(jmSobre);
 
         //adicionando itens nas opções de menu
         //opção Arquivo
+
         jmArquivo.add(jmiSalvar);
         jmArquivo.add(jmiCarregar);
+        jmArquivo.addSeparator();
         jmArquivo.add(jmiSair);
 
         //opção Cadastro
         jmCadastro.add(jmiCadastroCliente);
         jmCadastro.add(jmiCadastroProduto);
-        jmCadastro.add(jmiCadastroPedidos);
+
+        //opção Venda
+        jmVenda.add(jmiCadastroPedidos);
 
         //opção Visualizar
         jmVisualizar.add(jmiDados);
@@ -122,10 +149,26 @@ public class TelaPrincipal extends JFrame{
     }
 
     private void criarEventos() {
+
         jmiSair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                Object[] opcoes = {"Sim","Não","Cancelar"};
+                int opcao = JOptionPane.showOptionDialog(null,"Deseja salvar antes de sair?", "Sair",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,opcoes,opcoes[0]);
+                switch (opcao){
+                    case 0:
+                        arquivos.escreverArquivoCliente(clientes);
+                        arquivos.escreverArquivoProduto(produtos);
+                        arquivos.escreverArquivoPedido(pedidos);
+                        System.exit(0);
+                        break;
+                    case 1:
+                        System.exit(0);
+                        break;
+                    case 2:
+                        break;
+                }
+
             }
         });
         jmiSalvar.addActionListener(new ActionListener() {
@@ -155,6 +198,7 @@ public class TelaPrincipal extends JFrame{
         jmiCadastroCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
                 PainelCadastroCliente cliente = new PainelCadastroCliente(clientes);//passar o endereço da matriz dinamica(ArrayList()<>) para o painel cadastroCliente
                 contentPane.removeAll();//remove todos os componentes da tela
                 contentPane.add(cliente);//adicionar o painel
@@ -164,6 +208,7 @@ public class TelaPrincipal extends JFrame{
         jmiCadastroProduto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
                 PainelCadastroProduto produto = new PainelCadastroProduto(produtos);
                 contentPane.removeAll();//remove todos os componentes da tela
                 contentPane.add(produto);//adicionar o painel
@@ -173,6 +218,7 @@ public class TelaPrincipal extends JFrame{
         jmiCadastroPedidos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
                 PainelCadastroPedido pedido = new PainelCadastroPedido(pedidos,clientes,produtos);
                 contentPane.removeAll();//remove todos os componentes da tela
                 contentPane.add(pedido);//adicionar o painel
@@ -182,6 +228,7 @@ public class TelaPrincipal extends JFrame{
         jmiDados.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
                 PainelDados dados = new PainelDados(clientes,produtos,pedidos);
                 contentPane.removeAll();//remove todos os componentes da tela
                 contentPane.add(dados);//adicionar o painel
@@ -191,6 +238,7 @@ public class TelaPrincipal extends JFrame{
         jmiPesquisa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setSize(500,500);
                 PainelPesquisa pesquisa = new PainelPesquisa(clientes,produtos,pedidos);
                 contentPane.removeAll();//remove todos os componentes da tela
                 contentPane.add(pesquisa);//adicionar o painel

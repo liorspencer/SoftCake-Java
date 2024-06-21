@@ -1,7 +1,7 @@
 package classes;
 
 public class Sobre {
-    private String versao = "2.4";
+    private String versao = "2.5";
     private String autores = "Julio Cesar da Silva\n" +
             "Wellington Augusto Santos da Silva\n" +
             "LuÍs Henrique Ferreira de Souza\n" ;

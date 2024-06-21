@@ -38,24 +38,12 @@ public class Pedido implements Serializable {
         return nomeCliente;
     }
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
-    }
-
     public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
-    }
-
     public int getIdCliente() {
         return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public String getDescricao() {

@@ -1,6 +1,5 @@
 package paineis;
 
-import classes.Cliente;
 import classes.FontesPadrao;
 import classes.LimitarCaracteres;
 import classes.Produto;
@@ -9,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.List;
 
 public class PainelCadastroProduto extends JPanel {
@@ -46,11 +44,11 @@ public class PainelCadastroProduto extends JPanel {
         jlPeso = new JLabel("Peso (g):");
         jlDisponibilidade = new JLabel("Disponível:");
         jtfNome = new JTextField();
-        jtfNome.setDocument(new LimitarCaracteres(50,LimitarCaracteres.TipoDadoEntrada.letras));
+        jtfNome.setDocument(new LimitarCaracteres(50,LimitarCaracteres.TipoDadoEntrada.LETRAS));
         jtfPreco = new JTextField();
-        jtfPreco.setDocument(new LimitarCaracteres(13,LimitarCaracteres.TipoDadoEntrada.decimal));
+        jtfPreco.setDocument(new LimitarCaracteres(13,LimitarCaracteres.TipoDadoEntrada.DECIMAL));
         jtfPeso = new JTextField();
-        jtfPeso.setDocument(new LimitarCaracteres(15,LimitarCaracteres.TipoDadoEntrada.decimal));
+        jtfPeso.setDocument(new LimitarCaracteres(15,LimitarCaracteres.TipoDadoEntrada.DECIMAL));
         jtaDescricao = new JTextArea();
         jspDescricao = new JScrollPane(jtaDescricao,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jrbSim = new JRadioButton("Sim", true);

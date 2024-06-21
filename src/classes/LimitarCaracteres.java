@@ -6,7 +6,7 @@ import javax.swing.text.PlainDocument;
 
 public class LimitarCaracteres extends PlainDocument {
     public enum TipoDadoEntrada {
-        numeroInteiro, decimal, letras, email, data;
+        NUMERO_INTEIRO, DECIMAL, LETRAS, EMAIL, DATA;
     }
     private int quantCaracteres;
     private TipoDadoEntrada tipoEntrada;
@@ -21,22 +21,22 @@ public class LimitarCaracteres extends PlainDocument {
         }
         int totalCaracteres = getLength() + string.length();
 
-        //filtro de caractéres
+        //filtro de carácteres
         String regex = ""; // regular expression (expressão regular)
         switch (tipoEntrada) {
-            case numeroInteiro:
+            case NUMERO_INTEIRO:
                 regex = "[^0-9]";
                 break;
-            case decimal:
+            case DECIMAL:
                 regex = "[^0-9,.]";
                 break;
-            case letras:
+            case LETRAS:
                 regex = "[^\\p{IsLatin} ]";
                 break;
-            case email:
+            case EMAIL:
                 regex = "[^\\p{IsLatin}@.\\-_] [^0-9]";
                 break;
-            case data:
+            case DATA:
                 regex = "[^0-9/]";
                 break;
 
