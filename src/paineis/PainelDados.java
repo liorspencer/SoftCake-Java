@@ -1,6 +1,7 @@
 package paineis;
 
 import classes.Cliente;
+import classes.FontesPadrao;
 import classes.Pedido;
 import classes.Produto;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class PainelDados extends JPanel {
     private JButton jbClientes, jbProdutos, jbPedidos;
-
+    private FontesPadrao fontes;
     private JCheckBox jckAtivo, jckInativo, jckDisponivel, jckIndisponivel;
     private JTextArea jtaMostrar;
     private JScrollPane jsMostrar;
@@ -34,6 +35,7 @@ public class PainelDados extends JPanel {
 
     private void iniciarComponentes() {
         // Objetos
+        fontes = new FontesPadrao();
         jbClientes = new JButton("Clientes");
         jbProdutos = new JButton("Produtos");
         jbPedidos = new JButton("Pedidos");
@@ -58,15 +60,25 @@ public class PainelDados extends JPanel {
         add(jckAtivo);
         add(jsMostrar);
 
+        //estilizar
+        jbClientes.setFont(fontes.fontArialBotao());
+        jbProdutos.setFont(fontes.fontArialBotao());
+        jbPedidos.setFont(fontes.fontArialBotao());
+        jckAtivo.setFont(fontes.fontArialCorpo());
+        jckInativo.setFont(fontes.fontArialCorpo());
+        jckDisponivel.setFont(fontes.fontArialCorpo());
+        jckIndisponivel.setFont(fontes.fontArialCorpo());
+        jsMostrar.setFont(fontes.fontArialCorpo());
+
         //dimensionar
-        jbClientes.setBounds(20, 20, 95, 20);
-        jbProdutos.setBounds(195, 20, 95, 20);
-        jbPedidos.setBounds(370, 20, 95, 20);
+        jbClientes.setBounds(20, 15, 95, 30);
+        jbProdutos.setBounds(195, 15, 95, 30);
+        jbPedidos.setBounds(370, 15, 95, 30);
         jckAtivo.setBounds(370, 50, 100, 20);
         jckInativo.setBounds(370, 70, 100, 20);
         jckDisponivel.setBounds(195, 50, 100, 20);
         jckIndisponivel.setBounds(195,70,100,20);
-        jsMostrar.setBounds(20, 120, 440, 200);
+        jsMostrar.setBounds(20, 120, 440, 300);
 
     }
     private void criarEventos() {

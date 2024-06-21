@@ -67,8 +67,8 @@ public class PainelLogin extends JPanel {
         jlSenha.setBounds(150,230,60,20);
         jtfUsuario.setBounds(150,190,200,30);
         jpfSenha.setBounds(150,250,200,30);
-        jbLogin.setBounds(190,290,120,30);
-        jbCadastrar.setBounds(190,330,120,30);
+        jbLogin.setBounds(190,310,120,30);
+        jbCadastrar.setBounds(190,350,120,30);
 
         jlLogin.setForeground(Color.WHITE);
         jlUsuario.setForeground(Color.WHITE);
