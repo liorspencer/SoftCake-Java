@@ -32,7 +32,7 @@ public class PainelGerenciarPedidos extends JPanel {
         for (Pedido pedido : pedidos) {//foreach para circular entre todas as opções dentro do array pedidos
             if (pedido.isAtivo()) {//checar se o pedido está ativo
                 //CRIAR COMPONENTES
-                jpContainerInterno = new JPanel(new MigLayout("fillx", "5[grow 0]5[fill,grow 100]5","[][][fill,grow 100][][]"));
+                jpContainerInterno = new JPanel(new MigLayout("fillx", "5[grow 0]5[fill,grow 100]5"));
                 jpContainerInterno.setBackground(Color.WHITE);
                 jlNomeProdutoSelecao = new JLabel("ID do Pedido:");
                 jlNomeProdutoSelecaoResultado = new JLabel(String.valueOf(pedido.getIdPedido()));

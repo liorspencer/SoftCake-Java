@@ -155,15 +155,15 @@ public class PainelPesquisa extends JPanel {
                 int opcao = jcbProdutos.getSelectedIndex();
                 jtaMostrar.setText("Pedidos Cadastrados");
                 if (opcao==0){
-                    for (Pedido produto: pedidos){
-                        if (produto.getIdPedido()==Integer.parseInt(jtfPesquisa.getText())){
-                            jtaMostrar.append(produto.mostrarCadastro());
+                    for (Pedido pedido: pedidos){
+                        if (pedido.getIdPedido()==Integer.parseInt(jtfPesquisa.getText())){
+                            jtaMostrar.append(pedido.mostrarCadastro());
                         }
                     }
                 } else if(opcao==1){
-                    for (Pedido produto: pedidos){
-                        if (produto.getIdCliente()==Integer.parseInt(jtfPesquisa.getText())){
-                            jtaMostrar.append(produto.mostrarCadastro());
+                    for (Pedido pedido: pedidos){
+                        if (pedido.getIdCliente()==Integer.parseInt(jtfPesquisa.getText())){
+                            jtaMostrar.append(pedido.mostrarCadastro());
                         }
                     }
                 }
